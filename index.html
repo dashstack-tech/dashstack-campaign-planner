@@ -3,354 +3,885 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>DashStack 100-Day Cold Email Campaign</title>
+<title>DashStack 100-Day Campaign</title>
 <style>
-  *{box-sizing:border-box;margin:0;padding:0}
-  :root{
-    --purple:#7F77DD;--purple-l:#EEEDFE;--purple-d:#3C3489;
-    --teal:#1D9E75;--teal-l:#E1F5EE;
-    --amber:#BA7517;--amber-l:#FAEEDA;
-    --coral:#D85A30;--coral-l:#FAECE7;
-    --blue:#185FA5;--blue-l:#E6F1FB;
-    --green:#3B6D11;--green-l:#EAF3DE;
-    --gray:#5F5E5A;--gray-l:#F1EFE8;
-    --red:#A32D2D;--red-l:#FCEBEB;
-    --text:#2C2C2A;--text2:#5F5E5A;--border:#e0ddd6;--bg:#fff;--card:#fafaf8
-  }
-  @media(prefers-color-scheme:dark){
-    :root{--text:#e8e6df;--text2:#9c9a92;--border:#3a3835;--bg:#1e1d1b;--card:#252420;
-    --purple-l:#26215C;--teal-l:#04342C;--amber-l:#412402;--coral-l:#4A1B0C;--blue-l:#042C53;--green-l:#173404;--gray-l:#2C2C2A}
-  }
-  body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.6}
-  .cover{background:linear-gradient(135deg,#534AB7 0%,#7F77DD 40%,#1D9E75 100%);color:#fff;padding:48px 40px 40px;text-align:center;position:relative;overflow:hidden}
-  .cover::before{content:'';position:absolute;top:-60px;right:-60px;width:220px;height:220px;border-radius:50%;background:rgba(255,255,255,.06)}
-  .cover::after{content:'';position:absolute;bottom:-40px;left:-40px;width:160px;height:160px;border-radius:50%;background:rgba(255,255,255,.04)}
-  .cover-badge{display:inline-block;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.3);border-radius:20px;padding:4px 14px;font-size:11px;letter-spacing:.5px;margin-bottom:16px;text-transform:uppercase}
-  .cover h1{font-size:28px;font-weight:700;margin-bottom:6px}
-  .cover-sub{font-size:15px;opacity:.85;margin-bottom:28px}
-  .stats-row{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
-  .stat-pill{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);border-radius:12px;padding:10px 18px;min-width:120px}
-  .stat-pill .val{font-size:20px;font-weight:700;display:block}
-  .stat-pill .lbl{font-size:11px;opacity:.8;text-transform:uppercase;letter-spacing:.4px}
-  .nav{display:flex;gap:4px;padding:16px 20px;border-bottom:1px solid var(--border);overflow-x:auto;background:var(--bg);position:sticky;top:0;z-index:100}
-  .nav-btn{flex-shrink:0;padding:6px 14px;border-radius:8px;border:1.5px solid transparent;font-size:12px;font-weight:500;cursor:pointer;background:transparent;color:var(--text2);transition:all .2s}
-  .nav-btn.active,.nav-btn:hover{border-color:var(--purple);color:var(--purple);background:var(--purple-l)}
-  .nav-btn.active{font-weight:600}
-  .section{display:none;padding:24px 20px}
-  .section.active{display:block}
-  .phase-header{border-radius:12px;padding:18px 20px;margin-bottom:20px;display:flex;align-items:center;gap:14px}
-  .phase-icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
-  .phase-meta h2{font-size:17px;font-weight:600;margin-bottom:2px}
-  .phase-meta p{font-size:12px;opacity:.8}
-  .timeline{position:relative}
-  .timeline::before{content:'';position:absolute;left:18px;top:0;bottom:0;width:2px;background:var(--border)}
-  .day-item{position:relative;padding:0 0 16px 50px}
-  .day-dot{position:absolute;left:10px;top:4px;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;border:2px solid var(--bg);z-index:1}
-  .day-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 16px;transition:box-shadow .2s}
-  .day-card:hover{box-shadow:0 2px 12px rgba(0,0,0,.08)}
-  .day-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
-  .day-num{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--text2)}
-  .day-title{font-size:14px;font-weight:600;margin-bottom:2px}
-  .day-goal{font-size:12px;color:var(--text2);margin-bottom:10px}
-  .tasks{list-style:none}
-  .tasks li{display:flex;align-items:flex-start;gap:8px;padding:4px 0;font-size:13px;border-bottom:1px solid var(--border)}
-  .tasks li:last-child{border-bottom:none}
-  .tasks li.completed span{text-decoration:line-through;opacity:.5}
-  .check{width:16px;height:16px;border-radius:4px;border:1.5px solid var(--border);flex-shrink:0;margin-top:1px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
-  .check.done{background:var(--teal);border-color:var(--teal)}
-  .check.done::after{content:'✓';color:#fff;font-size:10px}
-  .tag{display:inline-block;font-size:10px;font-weight:600;padding:2px 7px;border-radius:5px;text-transform:uppercase;letter-spacing:.3px}
-  .tag-email{background:var(--blue-l);color:var(--blue)}
-  .tag-setup{background:var(--amber-l);color:var(--amber)}
-  .tag-review{background:var(--purple-l);color:var(--purple-d)}
-  .tag-deals{background:var(--green-l);color:var(--green)}
-  .metrics-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
-  .metric-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px}
-  .metric-card .m-val{font-size:22px;font-weight:700;color:var(--purple)}
-  .metric-card .m-lbl{font-size:11px;color:var(--text2);text-transform:uppercase;letter-spacing:.4px}
-  .progress-bar{background:var(--border);border-radius:4px;height:6px;margin-top:6px;overflow:hidden}
-  .progress-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--purple),var(--teal));transition:width .5s}
-  .template-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:12px}
-  .template-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;color:var(--text2);margin-bottom:8px}
-  .template-subject{font-size:13px;font-weight:600;color:var(--purple);margin-bottom:10px;font-style:italic}
-  .template-body{font-size:12px;color:var(--text2);line-height:1.7;white-space:pre-wrap;font-family:'Courier New',monospace;background:var(--bg);padding:10px;border-radius:6px;border:1px solid var(--border)}
-  .save-btn{padding:10px;background:var(--purple);color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;width:100%}
-  .save-btn:hover{opacity:.9}
-  .reset-btn{padding:8px;background:transparent;color:var(--red);border:1px solid var(--red);border-radius:8px;font-size:12px;cursor:pointer;width:100%;margin-top:8px}
-  .saved-badge{display:none;font-size:11px;color:var(--teal);text-align:center;margin-top:6px}
-  ::-webkit-scrollbar{width:4px;height:4px}::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --purple:#7F77DD;--purple-l:#EEEDFE;--purple-d:#3C3489;
+  --teal:#1D9E75;--teal-l:#E1F5EE;
+  --amber:#BA7517;--amber-l:#FAEEDA;
+  --coral:#D85A30;--coral-l:#FAECE7;
+  --blue:#185FA5;--blue-l:#E6F1FB;
+  --green:#3B6D11;--green-l:#EAF3DE;
+  --gray:#5F5E5A;--gray-l:#F1EFE8;
+  --red:#A32D2D;--red-l:#FCEBEB;
+  --text:#2C2C2A;--text2:#5F5E5A;--border:#e0ddd6;--bg:#fff;--card:#fafaf8
+}
+@media(prefers-color-scheme:dark){
+  :root{--text:#e8e6df;--text2:#9c9a92;--border:#3a3835;--bg:#1e1d1b;--card:#252420;
+  --purple-l:#26215C;--teal-l:#04342C;--amber-l:#412402;--coral-l:#4A1B0C;--blue-l:#042C53;--green-l:#173404;--gray-l:#2C2C2A;--red-l:#501313}
+}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.6}
+
+/* COVER */
+.cover{background:linear-gradient(135deg,#534AB7 0%,#7F77DD 45%,#1D9E75 100%);color:#fff;padding:36px 20px 32px;text-align:center;position:relative;overflow:hidden}
+.cover::before{content:'';position:absolute;top:-50px;right:-50px;width:180px;height:180px;border-radius:50%;background:rgba(255,255,255,.06)}
+.cover h1{font-size:22px;font-weight:700;margin-bottom:4px}
+.cover-sub{font-size:12px;opacity:.85;margin-bottom:18px}
+.stats-row{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.stat-pill{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);border-radius:10px;padding:8px 12px;min-width:90px}
+.stat-pill .val{font-size:17px;font-weight:700;display:block}
+.stat-pill .lbl{font-size:10px;opacity:.8;text-transform:uppercase;letter-spacing:.3px}
+
+/* NAV */
+.nav{display:flex;gap:3px;padding:10px 14px;border-bottom:1px solid var(--border);overflow-x:auto;background:var(--bg);position:sticky;top:0;z-index:100;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.nav-btn{flex-shrink:0;padding:5px 11px;border-radius:7px;border:1.5px solid transparent;font-size:11px;font-weight:500;cursor:pointer;background:transparent;color:var(--text2);transition:all .15s;white-space:nowrap}
+.nav-btn.active,.nav-btn:hover{border-color:var(--purple);color:var(--purple);background:var(--purple-l)}
+.nav-btn.active{font-weight:600}
+
+/* SECTIONS */
+.section{display:none;padding:16px 14px}
+.section.active{display:block}
+
+/* PHASE HEADER */
+.phase-header{border-radius:10px;padding:14px;margin-bottom:14px;display:flex;align-items:center;gap:12px}
+.phase-icon{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.phase-meta h2{font-size:14px;font-weight:600;margin-bottom:2px}
+.phase-meta p{font-size:11px;opacity:.8}
+
+/* TIMELINE */
+.timeline{position:relative}
+.timeline::before{content:'';position:absolute;left:15px;top:0;bottom:0;width:2px;background:var(--border)}
+.day-item{position:relative;padding:0 0 12px 40px}
+.day-dot{position:absolute;left:7px;top:4px;width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:7px;font-weight:700;border:2px solid var(--bg);z-index:1;color:#fff}
+.day-card{background:var(--card);border:1px solid var(--border);border-radius:9px;padding:11px 13px;transition:box-shadow .2s}
+.day-card:hover{box-shadow:0 2px 10px rgba(0,0,0,.07)}
+.day-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:5px}
+.day-num{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;color:var(--text2)}
+.day-title{font-size:13px;font-weight:600;margin-bottom:2px}
+.day-goal{font-size:11px;color:var(--text2);margin-bottom:7px;line-height:1.4}
+
+/* TASKS */
+.tasks{list-style:none}
+.task-group-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;color:var(--text2);padding:5px 0 2px;border-top:1px solid var(--border);margin-top:3px}
+.task-group-label:first-child{border-top:none;margin-top:0}
+.tasks li{display:flex;align-items:flex-start;gap:7px;padding:3px 0;font-size:12px;border-bottom:1px solid var(--border)}
+.tasks li:last-child{border-bottom:none}
+.tasks li.completed span{text-decoration:line-through;opacity:.45}
+.check{width:15px;height:15px;border-radius:3px;border:1.5px solid var(--border);flex-shrink:0;margin-top:1px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s}
+.check.done{background:var(--teal);border-color:var(--teal)}
+.check.done::after{content:'✓';color:#fff;font-size:9px;font-weight:700}
+.tag{display:inline-block;font-size:9px;font-weight:600;padding:2px 6px;border-radius:4px;text-transform:uppercase;letter-spacing:.3px}
+.tag-scrape{background:var(--green-l);color:var(--green)}
+.tag-email{background:var(--blue-l);color:var(--blue)}
+.tag-setup{background:var(--amber-l);color:var(--amber)}
+.tag-review{background:var(--purple-l);color:var(--purple-d)}
+.tag-dedup{background:var(--red-l);color:var(--red)}
+
+/* SCRAPING */
+.scrape-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:13px;margin-bottom:10px}
+.scrape-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.scrape-title{font-size:13px;font-weight:600}
+.scrape-badge{font-size:10px;font-weight:600;padding:2px 8px;border-radius:5px}
+.scrape-meta{font-size:11px;color:var(--text2);margin-bottom:8px}
+.scrape-terms{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px}
+.scrape-term{font-size:10px;background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:2px 6px;font-family:monospace}
+.city-grid{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px}
+.city-chip{font-size:10px;padding:2px 8px;border-radius:12px;border:1px solid var(--border);background:var(--bg);cursor:pointer;transition:all .15s}
+.city-chip.done-city{text-decoration:line-through;opacity:.5;background:var(--green-l);border-color:var(--green)}
+.json-block{background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:9px;font-family:monospace;font-size:10px;color:var(--text2);overflow-x:auto;white-space:pre;max-height:160px;overflow-y:auto}
+.copy-btn{margin-top:6px;padding:5px 12px;background:var(--purple);color:#fff;border:none;border-radius:6px;font-size:11px;cursor:pointer;font-weight:600}
+.copy-btn:hover{opacity:.9}
+
+/* MAILBOX TABLE */
+.mb-table{width:100%;border-collapse:collapse;font-size:11px;margin-bottom:12px}
+.mb-table th{text-align:left;padding:7px 9px;background:var(--gray-l);color:var(--text2);font-size:10px;text-transform:uppercase;letter-spacing:.3px}
+.mb-table td{padding:7px 9px;border-bottom:1px solid var(--border);vertical-align:top}
+.mb-table tr:last-child td{border-bottom:none}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;vertical-align:middle}
+
+/* DEDUP */
+.dedup-step{background:var(--card);border:1px solid var(--border);border-radius:9px;padding:12px;margin-bottom:8px;display:flex;gap:10px;align-items:flex-start}
+.dedup-num{width:24px;height:24px;border-radius:50%;background:var(--purple);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.dedup-content{flex:1}
+.dedup-title{font-size:12px;font-weight:600;margin-bottom:3px}
+.dedup-desc{font-size:11px;color:var(--text2);line-height:1.5}
+
+/* METRICS */
+.metrics-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.metric-card{background:var(--card);border:1px solid var(--border);border-radius:9px;padding:12px}
+.metric-card .m-val{font-size:20px;font-weight:700;color:var(--purple)}
+.metric-card .m-lbl{font-size:10px;color:var(--text2);text-transform:uppercase;letter-spacing:.3px}
+.progress-bar{background:var(--border);border-radius:3px;height:5px;margin-top:5px;overflow:hidden}
+.progress-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--purple),var(--teal));transition:width .5s}
+.form-label{font-size:11px;color:var(--text2);display:block;margin-bottom:3px}
+.form-input{width:100%;padding:7px;border:1px solid var(--border);border-radius:6px;background:var(--bg);color:var(--text);font-size:12px}
+.save-btn{padding:9px;background:var(--purple);color:#fff;border:none;border-radius:7px;font-size:12px;font-weight:600;cursor:pointer;width:100%;margin-top:4px}
+.reset-btn{padding:7px;background:transparent;color:var(--red);border:1px solid var(--red);border-radius:7px;font-size:11px;cursor:pointer;width:100%;margin-top:6px}
+.saved-badge{display:none;font-size:11px;color:var(--teal);text-align:center;margin-top:5px;font-weight:600}
+
+/* TEMPLATES */
+.template-card{background:var(--card);border:1px solid var(--border);border-radius:9px;padding:13px;margin-bottom:10px}
+.template-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.3px;color:var(--text2);margin-bottom:5px}
+.template-subject{font-size:12px;font-weight:600;color:var(--purple);margin-bottom:7px}
+.template-body{font-size:11px;color:var(--text2);line-height:1.7;white-space:pre-wrap;font-family:'Courier New',monospace;background:var(--bg);padding:9px;border-radius:5px;border:1px solid var(--border)}
+
+::-webkit-scrollbar{width:3px;height:3px}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
 </style>
 </head>
 <body>
 
 <div class="cover">
-  <div class="cover-badge">📧 100-Day Cold Email Campaign</div>
-  <h1>DashStack Infotech</h1>
-  <div class="cover-sub">Ravi Vithani · Full Stack Flutter Developer · IST Timezone</div>
+  <h1>DashStack — 100-Day Cold Email Campaign</h1>
+  <div class="cover-sub">Ravi Vithani · Flutter Developer · godashstack.com · IST Timezone</div>
   <div class="stats-row">
-    <div class="stat-pill"><span class="val">10,000+</span><span class="lbl">USA Leads</span></div>
-    <div class="stat-pill"><span class="val">100/day</span><span class="lbl">Emails Sent</span></div>
-    <div class="stat-pill"><span class="val">30–75</span><span class="lbl">Expected Deals</span></div>
-    <div class="stat-pill"><span class="val">$1.5M</span><span class="lbl">Revenue Target</span></div>
+    <div class="stat-pill"><span class="val">10K+</span><span class="lbl">USA Leads</span></div>
+    <div class="stat-pill"><span class="val">100/day</span><span class="lbl">Emails</span></div>
+    <div class="stat-pill"><span class="val">5</span><span class="lbl">Industries</span></div>
+    <div class="stat-pill"><span class="val">20 cities</span><span class="lbl">USA Wide</span></div>
+    <div class="stat-pill"><span class="val">$1.5M</span><span class="lbl">Target</span></div>
   </div>
 </div>
 
 <div class="nav">
-  <button class="nav-btn active" onclick="show('setup',this)">⚙️ Pre-Launch</button>
-  <button class="nav-btn" onclick="show('phase1',this)">🚀 Phase 1 (1–25)</button>
-  <button class="nav-btn" onclick="show('phase2',this)">💊 Phase 2 (26–50)</button>
-  <button class="nav-btn" onclick="show('phase3',this)">💡 Phase 3 (51–75)</button>
-  <button class="nav-btn" onclick="show('phase4',this)">🏪 Phase 4 (76–100)</button>
+  <button class="nav-btn active" onclick="show('warmup',this)">🔥 Warmup</button>
+  <button class="nav-btn" onclick="show('scraping',this)">🔍 Scraping</button>
+  <button class="nav-btn" onclick="show('dedup',this)">🛡 Dedup</button>
+  <button class="nav-btn" onclick="show('mailboxes',this)">📬 Mailboxes</button>
+  <button class="nav-btn" onclick="show('phase1',this)">🚀 Tech</button>
+  <button class="nav-btn" onclick="show('phase2',this)">🏥 Health</button>
+  <button class="nav-btn" onclick="show('phase3',this)">🛒 Ecom</button>
+  <button class="nav-btn" onclick="show('phase4',this)">💡 Startup</button>
+  <button class="nav-btn" onclick="show('phase5',this)">🏪 Service</button>
   <button class="nav-btn" onclick="show('templates',this)">📧 Templates</button>
   <button class="nav-btn" onclick="show('metrics',this)">📊 Tracker</button>
 </div>
 
-<div class="section active" id="setup">
+<!-- WARMUP -->
+<div class="section active" id="warmup">
   <div class="phase-header" style="background:var(--amber-l)">
-    <div class="phase-icon" style="background:var(--amber);color:#fff">⚙️</div>
-    <div class="phase-meta"><h2>Pre-Launch Setup (Week 1–3)</h2><p>Infrastructure, leads, warmup — before Day 1 send</p></div>
+    <div class="phase-icon" style="background:var(--amber);color:#fff">🔥</div>
+    <div class="phase-meta"><h2>Warmup Phase (14 Days — Before Day 1 Send)</h2><p>Warmup started 0–3 days ago · Day 1 send = 11–14 days from now</p></div>
   </div>
-  <div class="timeline" id="setup-timeline"></div>
+  <div id="warmup-timeline"></div>
 </div>
 
+<!-- SCRAPING -->
+<div class="section" id="scraping">
+  <div class="phase-header" style="background:var(--green-l)">
+    <div class="phase-icon" style="background:var(--green);color:#fff">🔍</div>
+    <div class="phase-meta"><h2>Apify Scraping Plan</h2><p>$29 starter · 1 industry run/day · ~500 leads/run · Top up when needed</p></div>
+  </div>
+  <div style="background:var(--card);border:1px solid var(--border);border-radius:9px;padding:11px;margin-bottom:12px;font-size:11px;line-height:1.6">
+    <strong>How to use:</strong> Run 1 industry per day. Click a city chip to mark it as done (scraping complete). Each run costs ~$2. Change <code style="background:var(--bg);padding:1px 4px;border-radius:3px;border:1px solid var(--border)">locationQuery</code> to the city for that day's run. Always use <code style="background:var(--bg);padding:1px 4px;border-radius:3px;border:1px solid var(--border)">"withWebsite": true</code> to save credits.
+  </div>
+  <div id="scrape-cards"></div>
+</div>
+
+<!-- DEDUPLICATION -->
+<div class="section" id="dedup">
+  <div class="phase-header" style="background:var(--red-l)">
+    <div class="phase-icon" style="background:var(--red);color:#fff">🛡</div>
+    <div class="phase-meta"><h2>Deduplication System</h2><p>3-layer protection — prevent same lead getting multiple emails</p></div>
+  </div>
+
+  <div class="dedup-step">
+    <div class="dedup-num">1</div>
+    <div class="dedup-content">
+      <div class="dedup-title">Layer 1 — Apify Level (Before Scraping)</div>
+      <div class="dedup-desc">Never scrape same City × Industry combination twice. Use the city chips in the Scraping tab to track what's done. Rule: if chip is marked done, never run that city+industry again on Apify.</div>
+    </div>
+  </div>
+
+  <div class="dedup-step">
+    <div class="dedup-num">2</div>
+    <div class="dedup-content">
+      <div class="dedup-title">Layer 2 — Google Sheet Master List (Before Upload)</div>
+      <div class="dedup-desc">
+        Create a Google Sheet called <strong>"DashStack Master Leads"</strong> with columns: Email | Company | Industry | City | Scraped Date | Uploaded Date | Campaign.<br><br>
+        Every time you export CSV from Apify → paste into master sheet first → use this formula to find duplicates before uploading to Smartlead:<br><br>
+        <code style="background:var(--bg);padding:4px 6px;border-radius:4px;border:1px solid var(--border);font-size:10px;display:block;margin-top:4px">=COUNTIF($B$2:B2,B2)&gt;1</code><br>
+        Add this in column H ("IsDuplicate"). Filter H=TRUE and delete those rows before uploading.
+      </div>
+    </div>
+  </div>
+
+  <div class="dedup-step">
+    <div class="dedup-num">3</div>
+    <div class="dedup-content">
+      <div class="dedup-title">Layer 3 — Smartlead Global Unsubscribe List</div>
+      <div class="dedup-desc">In Smartlead → Settings → Global Unsubscribe → upload every email you've ever contacted. This prevents the same person receiving emails from 2 different mailboxes/campaigns. Update this list every Friday with that week's sends.</div>
+    </div>
+  </div>
+
+  <div class="dedup-step">
+    <div class="dedup-num">4</div>
+    <div class="dedup-content">
+      <div class="dedup-title">Layer 4 — Follow-up Dedup (Smartlead Automatic)</div>
+      <div class="dedup-desc">Smartlead automatically skips follow-ups for anyone who replied or unsubscribed. Your sequence is: Day 0 (initial) → Day 7 (follow-up 1) → Day 12 (final follow-up). Anyone who replied gets removed from sequence automatically. You don't need to do anything extra.</div>
+    </div>
+  </div>
+
+  <div style="background:var(--amber-l);border:1px solid var(--amber);border-radius:9px;padding:11px;font-size:11px;margin-top:4px">
+    <strong style="color:var(--amber)">⚠️ Weekly Dedup Checklist (Every Friday):</strong><br>
+    □ Export this week's sent list from Smartlead<br>
+    □ Paste emails into Master Sheet<br>
+    □ Upload to Smartlead Global Unsubscribe list<br>
+    □ Mark scraped city chips as done in Scraping tab
+  </div>
+</div>
+
+<!-- MAILBOXES -->
+<div class="section" id="mailboxes">
+  <div class="phase-header" style="background:var(--blue-l)">
+    <div class="phase-icon" style="background:var(--blue);color:#fff">📬</div>
+    <div class="phase-meta"><h2>Mailbox → Industry Assignment</h2><p>1 mailbox per industry · Never mix industries across mailboxes</p></div>
+  </div>
+  <table class="mb-table">
+    <tr><th>#</th><th>Email</th><th>Industry</th><th>Phase</th><th>Pitch</th></tr>
+    <tr>
+      <td>1</td>
+      <td style="font-family:monospace">ravi@godashstack.com</td>
+      <td><span class="dot" style="background:var(--blue)"></span>Tech</td>
+      <td>Days 1–20</td>
+      <td style="color:var(--text2)">Flutter mobile app for your tech product</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td style="font-family:monospace">ravi.vithani@godashstack.com</td>
+      <td><span class="dot" style="background:var(--teal)"></span>Healthcare</td>
+      <td>Days 21–40</td>
+      <td style="color:var(--text2)">HIPAA-ready patient mobile app</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td style="font-family:monospace">r.vithani@godashstack.com</td>
+      <td><span class="dot" style="background:var(--coral)"></span>Ecommerce</td>
+      <td>Days 41–60</td>
+      <td style="color:var(--text2)">Mobile app = 40% more repeat buyers</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td style="font-family:monospace">ravi.v@godashstack.com</td>
+      <td><span class="dot" style="background:var(--purple)"></span>Startups</td>
+      <td>Days 61–80</td>
+      <td style="color:var(--text2)">Flutter MVP — idea to launch in weeks</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td style="font-family:monospace">rv@godashstack.com</td>
+      <td><span class="dot" style="background:var(--amber)"></span>Service</td>
+      <td>Days 81–100</td>
+      <td style="color:var(--text2)">Booking app — 2x more appointments</td>
+    </tr>
+  </table>
+  <div style="background:var(--teal-l);border:1px solid var(--teal);border-radius:8px;padding:11px;font-size:11px">
+    <strong style="color:var(--teal)">Follow-up sequence for ALL industries:</strong><br>
+    Day 0 → Initial email · Day 7 → Follow-up 1 · Day 12 → Final follow-up<br>
+    Smartlead auto-stops sequence if prospect replies or clicks unsubscribe.
+  </div>
+</div>
+
+<!-- PHASE 1 TECH -->
 <div class="section" id="phase1">
   <div class="phase-header" style="background:var(--blue-l)">
     <div class="phase-icon" style="background:var(--blue);color:#fff">🚀</div>
-    <div class="phase-meta"><h2>Phase 1 — Tech Companies (Days 1–25)</h2><p>NYC · SF · LA · Chicago · Austin · Seattle · Boston · 15–25 expected deals · $225K–$500K</p></div>
+    <div class="phase-meta"><h2>Phase 1 — Tech Companies (Days 1–20)</h2><p>ravi@godashstack.com · 20 emails/day · NYC → SF → LA → Chicago → Austin → Boston → Seattle → Dallas → Houston → Phoenix (×2)</p></div>
   </div>
-  <div class="timeline" id="phase1-timeline"></div>
+  <div class="timeline" id="p1-tl"></div>
 </div>
 
+<!-- PHASE 2 HEALTH -->
 <div class="section" id="phase2">
   <div class="phase-header" style="background:var(--teal-l)">
-    <div class="phase-icon" style="background:var(--teal);color:#fff">💊</div>
-    <div class="phase-meta"><h2>Phase 2 — HealthTech, FinTech, E-commerce (Days 26–50)</h2><p>2,500 leads · 12–20 deals · $180K–$400K</p></div>
+    <div class="phase-icon" style="background:var(--teal);color:#fff">🏥</div>
+    <div class="phase-meta"><h2>Phase 2 — Healthcare (Days 21–40)</h2><p>ravi.vithani@godashstack.com · 20 emails/day · NYC → Houston → LA → Chicago → Phoenix → Philadelphia → San Diego → Miami → Denver → Atlanta (×2)</p></div>
   </div>
-  <div class="timeline" id="phase2-timeline"></div>
+  <div class="timeline" id="p2-tl"></div>
 </div>
 
+<!-- PHASE 3 ECOM -->
 <div class="section" id="phase3">
+  <div class="phase-header" style="background:var(--coral-l)">
+    <div class="phase-icon" style="background:var(--coral);color:#fff">🛒</div>
+    <div class="phase-meta"><h2>Phase 3 — Ecommerce (Days 41–60)</h2><p>r.vithani@godashstack.com · 20 emails/day · NYC → LA → Chicago → Miami → Atlanta → Dallas → Seattle → Denver → Portland → Nashville (×2)</p></div>
+  </div>
+  <div class="timeline" id="p3-tl"></div>
+</div>
+
+<!-- PHASE 4 STARTUP -->
+<div class="section" id="phase4">
   <div class="phase-header" style="background:var(--purple-l)">
     <div class="phase-icon" style="background:var(--purple);color:#fff">💡</div>
-    <div class="phase-meta"><h2>Phase 3 — Funded Startups (Days 51–75)</h2><p>Series A/B/C · 2,500 leads · 10–18 deals · $150K–$360K</p></div>
+    <div class="phase-meta"><h2>Phase 4 — Startups (Days 61–80)</h2><p>ravi.v@godashstack.com · 20 emails/day · SF → NYC → Austin → Boston → LA → Seattle → Denver → Miami → Chicago → Philadelphia (×2)</p></div>
   </div>
-  <div class="timeline" id="phase3-timeline"></div>
+  <div class="timeline" id="p4-tl"></div>
 </div>
 
-<div class="section" id="phase4">
-  <div class="phase-header" style="background:var(--coral-l)">
-    <div class="phase-icon" style="background:var(--coral);color:#fff">🏪</div>
-    <div class="phase-meta"><h2>Phase 4 — Service Businesses (Days 76–100)</h2><p>Restaurants · Clinics · Salons · Hotels · 8–15 deals · $40K–$225K</p></div>
+<!-- PHASE 5 SERVICE -->
+<div class="section" id="phase5">
+  <div class="phase-header" style="background:var(--amber-l)">
+    <div class="phase-icon" style="background:var(--amber);color:#fff">🏪</div>
+    <div class="phase-meta"><h2>Phase 5 — Service Business (Days 81–100)</h2><p>rv@godashstack.com · 20 emails/day · NYC → LA → Chicago → Houston → Phoenix → Las Vegas → Nashville → Atlanta → Dallas → Miami (×2)</p></div>
   </div>
-  <div class="timeline" id="phase4-timeline"></div>
+  <div class="timeline" id="p5-tl"></div>
 </div>
 
+<!-- TEMPLATES -->
 <div class="section" id="templates">
   <div class="phase-header" style="background:var(--gray-l)">
     <div class="phase-icon" style="background:var(--gray);color:#fff">📧</div>
-    <div class="phase-meta"><h2>Email Templates (6 Variants)</h2><p>Copy into Smartlead · Personalize {{variables}} before sending</p></div>
+    <div class="phase-meta"><h2>Email Templates + Follow-ups</h2><p>5 industries × 3 emails each (Initial + Day 7 + Day 12) = 15 templates</p></div>
   </div>
   <div id="templates-list"></div>
 </div>
 
+<!-- TRACKER -->
 <div class="section" id="metrics">
   <div class="phase-header" style="background:var(--green-l)">
     <div class="phase-icon" style="background:var(--green);color:#fff">📊</div>
-    <div class="phase-meta"><h2>Progress Tracker</h2><p>Auto-saved · Update daily at 5:00 PM IST</p></div>
+    <div class="phase-meta"><h2>Progress Tracker</h2><p>Auto-saved to browser · Update daily at 5 PM IST</p></div>
   </div>
   <div class="metrics-grid">
-    <div class="metric-card">
-      <div class="m-val" id="m-day">0</div>
-      <div class="m-lbl">Current Day</div>
-      <div class="progress-bar"><div class="progress-fill" id="pb-day" style="width:0%"></div></div>
-    </div>
-    <div class="metric-card">
-      <div class="m-val" id="m-sent">0</div>
-      <div class="m-lbl">Emails Sent</div>
-      <div class="progress-bar"><div class="progress-fill" id="pb-sent" style="width:0%;background:linear-gradient(90deg,var(--teal),var(--green))"></div></div>
-    </div>
-    <div class="metric-card">
-      <div class="m-val" id="m-resp">0</div>
-      <div class="m-lbl">Responses</div>
-    </div>
-    <div class="metric-card">
-      <div class="m-val" id="m-deals">0</div>
-      <div class="m-lbl">Deals Won</div>
-    </div>
+    <div class="metric-card"><div class="m-val" id="m-day">0</div><div class="m-lbl">Current Day</div><div class="progress-bar"><div class="progress-fill" id="pb-day" style="width:0%"></div></div></div>
+    <div class="metric-card"><div class="m-val" id="m-sent">0</div><div class="m-lbl">Emails Sent</div><div class="progress-bar"><div class="progress-fill" id="pb-sent" style="width:0%;background:linear-gradient(90deg,var(--teal),var(--green))"></div></div></div>
+    <div class="metric-card"><div class="m-val" id="m-resp">0</div><div class="m-lbl">Responses</div></div>
+    <div class="metric-card"><div class="m-val" id="m-deals">0</div><div class="m-lbl">Deals Won</div></div>
   </div>
-  <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:16px">
-    <div style="font-size:13px;font-weight:600;margin-bottom:12px">Update Today's Progress</div>
-    <div style="display:flex;flex-direction:column;gap:10px">
-      <label style="font-size:12px;color:var(--text2)">Day Number (1–100)
-        <input type="number" id="inp-day" min="1" max="100" placeholder="e.g. 14" style="display:block;margin-top:4px;width:100%;padding:8px;border:1px solid var(--border);border-radius:6px;background:var(--bg);color:var(--text);font-size:13px">
-      </label>
-      <label style="font-size:12px;color:var(--text2)">Total Emails Sent (cumulative)
-        <input type="number" id="inp-sent" placeholder="e.g. 1400" style="display:block;margin-top:4px;width:100%;padding:8px;border:1px solid var(--border);border-radius:6px;background:var(--bg);color:var(--text);font-size:13px">
-      </label>
-      <label style="font-size:12px;color:var(--text2)">Total Responses
-        <input type="number" id="inp-resp" placeholder="e.g. 84" style="display:block;margin-top:4px;width:100%;padding:8px;border:1px solid var(--border);border-radius:6px;background:var(--bg);color:var(--text);font-size:13px">
-      </label>
-      <label style="font-size:12px;color:var(--text2)">Deals Closed
-        <input type="number" id="inp-deals" placeholder="e.g. 2" style="display:block;margin-top:4px;width:100%;padding:8px;border:1px solid var(--border);border-radius:6px;background:var(--bg);color:var(--text);font-size:13px">
-      </label>
-      <button class="save-btn" onclick="updateMetrics()">Save Progress</button>
-      <div class="saved-badge" id="saved-badge">✅ Saved successfully</div>
+  <div style="background:var(--card);border:1px solid var(--border);border-radius:9px;padding:13px;margin-bottom:10px">
+    <div style="font-size:12px;font-weight:600;margin-bottom:10px">Update Today's Numbers</div>
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <label><span class="form-label">Day Number (1–100)</span><input type="number" id="inp-day" min="1" max="100" placeholder="e.g. 5" class="form-input"></label>
+      <label><span class="form-label">Total Emails Sent (cumulative)</span><input type="number" id="inp-sent" placeholder="e.g. 100" class="form-input"></label>
+      <label><span class="form-label">Total Responses</span><input type="number" id="inp-resp" placeholder="e.g. 8" class="form-input"></label>
+      <label><span class="form-label">Deals Closed</span><input type="number" id="inp-deals" placeholder="e.g. 1" class="form-input"></label>
+      <button class="save-btn" onclick="saveMetrics()">💾 Save Progress</button>
+      <div class="saved-badge" id="saved-badge">✅ Saved successfully!</div>
       <button class="reset-btn" onclick="resetAll()">🗑 Reset All Progress</button>
     </div>
   </div>
-  <div id="rate-display" style="display:none;background:var(--teal-l);border:1px solid var(--teal);border-radius:10px;padding:14px;font-size:13px">
+  <div id="rate-display" style="display:none;background:var(--teal-l);border:1px solid var(--teal);border-radius:8px;padding:11px;font-size:12px">
     <strong style="color:var(--teal)">📈 Response Rate:</strong> <span id="rate-val"></span>%
     &nbsp;|&nbsp; <strong style="color:var(--teal)">🎯 Close Rate:</strong> <span id="close-val"></span>%
   </div>
 </div>
 
 <script>
-const LS_CHECKS = 'ds_checks';
-const LS_METRICS = 'ds_metrics';
+const LS_C='ds3_checks', LS_M='ds3_metrics', LS_CITIES='ds3_cities';
 
-// ── DATA ──────────────────────────────────────────────────────────────────────
-const setupDays = [
-  {day:'W1 · Day 1',title:'Email Infrastructure',goal:'Set up all 5 Smartlead mailboxes',
-   tasks:['Log in to app.smartlead.ai','Connect your 1 existing mailbox','Set daily send limit: 20 emails/mailbox','Buy 4 more mailboxes (~$50–60/month total)','Label all 5 mailboxes (tech / health / ecom / startup / service)'],tags:['setup','setup','setup','setup','setup']},
-  {day:'W1 · Day 1–2',title:'Lead Scraping Start',goal:'Launch Google Maps Scraper on Apify (takes 6–8 hrs)',
-   tasks:['Create free Apify account at apify.com','Find Google Maps Scraper actor','Paste USA_Google_Maps_Ultimate.json config','Click Run — takes 6–8 hours','Let it run overnight'],tags:['setup','setup','setup','setup','setup']},
-  {day:'W1 · Day 2',title:'Warmup Begin',goal:'Start 2-week mailbox warmup to build reputation',
-   tasks:['Send 5 test emails from each mailbox (morning)','Send 5 more test emails each (noon)','Use personal email as recipient','Content: simple "Testing email delivery"','Log warmup status in Google Sheet'],tags:['email','email','setup','setup','review']},
-  {day:'W1 · Day 3',title:'Download & Clean Leads',goal:'Get 8,000–10,000 clean leads from Apify',
-   tasks:['Download CSV from Apify (export → CSV)','Remove rows with no email/phone/website','Remove rating < 3.0 and reviews > 6 months old','Add columns: industry, city, source, recent_review_date','Save as DashStack_Leads_Clean.csv'],tags:['setup','setup','setup','setup','setup']},
-  {day:'W2 · Day 4–5',title:'Smartlead Campaign Setup',goal:'Upload leads and create 6 email templates',
-   tasks:['Upload DashStack_Leads_Clean.csv to Smartlead','Map columns: company, first/last name, email, city, industry','Create Template 1: Tech Companies','Create Template 2: HealthTech','Create Templates 3–6 (see Templates tab)','Configure follow-up sequences: Day 3, 7, 12'],tags:['setup','setup','email','email','email','email']},
-  {day:'W2 · Day 6',title:'WhatsApp Setup',goal:'Add signature and save quick-reply templates',
-   tasks:['Update email signature with WhatsApp 8153916802','Save 5 WhatsApp quick-reply templates','Test send 10 emails from each mailbox','Check: all arrive in inbox (not spam)?','If spam: check DKIM/SPF/DMARC settings in Smartlead'],tags:['setup','setup','email','review','setup']},
-  {day:'W2 · Day 7',title:'Google Sheet Setup',goal:'Build your 4-tab tracking dashboard',
-   tasks:['Create Sheet 1: Daily Sends','Create Sheet 2: Responses','Create Sheet 3: Metrics','Create Sheet 4: Lead List','Share/backup sheet to Google Drive'],tags:['setup','setup','setup','setup','setup']},
-  {day:'W3 · Days 8–14',title:'Continue Warmup + Final Test',goal:'Scale to 20 test emails/day, verify inbox delivery',
-   tasks:['Send 10 AM + 10 noon test emails per mailbox','Verify all arrive in inbox daily','Thursday: final test — 20 emails from each mailbox','All 5 mailboxes verified inbox delivery?','If OK → ready for Day 1 launch!'],tags:['email','review','email','review','review']},
-  {day:'W3 · Day Before Launch',title:'Pre-Launch Final Check',goal:'Everything ready for 100/day sends',
-   tasks:['First 100 leads loaded in Smartlead queue','All 6 email templates reviewed','Follow-up sequences (Day 3, 7, 12) verified active','WhatsApp quick replies saved and tested','Google Sheet open and ready to log Day 1'],tags:['review','review','review','setup','setup']},
+// ── INDUSTRIES ──────────────────────────────────────────────────────────────
+const IND = [
+  {
+    id:'tech', label:'Tech', emoji:'🚀', color:'var(--blue)', colorL:'var(--blue-l)',
+    mailbox:'ravi@godashstack.com', phase:[1,20],
+    cities:['New York','San Francisco','Los Angeles','Chicago','Austin','Boston','Seattle','Dallas','Houston','Phoenix'],
+    terms:['mobile app development company','software development agency','flutter app developer','SaaS company','digital product studio','IT consulting firm','app development studio','tech startup','software engineering company','product development company'],
+    pitch:'Full-stack Flutter mobile app (iOS + Android + Backend)',
+    angle:'Tech companies need mobile to stay competitive'
+  },
+  {
+    id:'health', label:'Healthcare', emoji:'🏥', color:'var(--teal)', colorL:'var(--teal-l)',
+    mailbox:'ravi.vithani@godashstack.com', phase:[21,40],
+    cities:['New York','Houston','Los Angeles','Chicago','Phoenix','Philadelphia','San Diego','Miami','Denver','Atlanta'],
+    terms:['medical clinic','health tech company','dental practice','telehealth startup','medical software','healthcare app company','hospital','patient management','physical therapy clinic','urgent care center'],
+    pitch:'HIPAA-ready Flutter patient app',
+    angle:'Healthcare needs secure, compliant mobile apps'
+  },
+  {
+    id:'ecom', label:'Ecommerce', emoji:'🛒', color:'var(--coral)', colorL:'var(--coral-l)',
+    mailbox:'r.vithani@godashstack.com', phase:[41,60],
+    cities:['New York','Los Angeles','Chicago','Miami','Atlanta','Dallas','Seattle','Denver','Portland','Nashville'],
+    terms:['ecommerce store','online retail brand','shopify brand','clothing brand','beauty brand online','home decor store','fashion brand','supplement brand','pet products store','electronics online store'],
+    pitch:'Dedicated mobile shopping app',
+    angle:'Mobile app users spend 3x more than mobile web'
+  },
+  {
+    id:'startup', label:'Startups', emoji:'💡', color:'var(--purple)', colorL:'var(--purple-l)',
+    mailbox:'ravi.v@godashstack.com', phase:[61,80],
+    cities:['San Francisco','New York','Austin','Boston','Los Angeles','Seattle','Denver','Miami','Chicago','Philadelphia'],
+    terms:['tech startup','startup office','seed stage company','series a startup','venture backed startup','startup accelerator','tech incubator','early stage startup','funded startup','product startup'],
+    pitch:'Production Flutter MVP — idea to launch fast',
+    angle:'Startups need speed + quality without technical debt'
+  },
+  {
+    id:'service', label:'Service Biz', emoji:'🏪', color:'var(--amber)', colorL:'var(--amber-l)',
+    mailbox:'rv@godashstack.com', phase:[81,100],
+    cities:['New York','Los Angeles','Chicago','Houston','Phoenix','Las Vegas','Nashville','Atlanta','Dallas','Miami'],
+    terms:['restaurant','dental clinic','hair salon','hotel','real estate agency','gym fitness center','spa wellness center','auto repair','nail salon','barbershop'],
+    pitch:'Mobile booking app for your business',
+    angle:'Customers book 2x more on app than by phone'
+  }
 ];
 
-function genPhase(startDay,endDay,segment,cities,tips){
-  const days=[];const weeks=['Mon','Tue','Wed','Thu','Fri'];
-  for(let d=startDay;d<=endDay;d++){
-    const wk=Math.ceil((d-startDay+1)/5);const wd=weeks[(d-startDay)%5];
-    const city=cities[(d-startDay)%cities.length];const tip=tips[(d-startDay)%tips.length];
-    const isWeekly=((d-startDay+1)%5===0);
-    const tasks=[`11:00 AM — Send 20 emails (MB1) to ${city} ${segment}`,`12:00 PM — Send 20 emails (MB2) — ${segment} variant`,`2:30 PM — Send 20 emails (MB3)`,`3:30 PM — Send 20 emails (MB4)`,`4:30 PM — Send 20 emails (MB5)`,`5:00 PM — Log 100/100 sent in Google Sheet`,`Check bounces & immediate replies`];
-    if(isWeekly)tasks.push(`⭐ Friday review: open rate, response rate, bounce rate`);
-    tasks.push(`Prep tomorrow's leads in Smartlead queue`);
-    days.push({day:`Day ${d}`,title:`${wd} · Week ${wk} · ${city}`,goal:tip,tasks,tags:tasks.map((_,i)=>i<5?'email':i===5?'review':'setup')});
+// ── WARMUP DAYS ─────────────────────────────────────────────────────────────
+const WARMUP = [
+  {day:'W1 · Day 1', title:'Email Infrastructure Complete ✅', goal:'Already done — mailboxes purchased & connected',
+   groups:[
+     {label:'✅ Completed Tasks', tasks:['5 mailboxes purchased on SmartSenders (godashstack.com)','All mailboxes connected to Smartlead','Profile photo (Ravi photo) added to all mailboxes','Sender name set to Ravi Vithani on all 5']},
+     {label:'🔧 Today — Remaining Setup', tasks:['Fix DKIM on team@dashstack.tech (Cloudflare DNS)','Verify DMARC + SPF on all 5 godashstack.com mailboxes','Enable warmup on all 5 mailboxes in Smartlead → Warmup tab','Set warmup to: 5 emails/day, reply rate 50%']}
+   ]},
+  {day:'W1 · Day 2', title:'Calendly + Portfolio Setup', goal:'Get booking link ready before Day 1 send',
+   groups:[
+     {label:'📅 Calendly Setup (30 min)', tasks:['Go to calendly.com → sign up free','Create event: "15-Min Mobile App Discovery Call"','Set availability: Mon–Fri 10AM–6PM IST','Copy your Calendly link','Add link to ALL email signatures in Smartlead']},
+     {label:'🌐 Portfolio Check', tasks:['Verify dashstack.notion.site/Ravi-Vithani is live','Add at least 1 case study per industry (Tech, Health, Ecom, Startup, Service)','Update www.dashstack.tech with your services','Test all links work on mobile']}
+   ]},
+  {day:'W1 · Day 3', title:'Google Sheet Master Setup', goal:'Build deduplication master sheet before scraping starts',
+   groups:[
+     {label:'📊 Create Master Leads Sheet', tasks:['Create Google Sheet: "DashStack Master Leads"','Add columns: Email | Company | Industry | City | ScrapedDate | UploadedDate | Campaign | IsDuplicate','In column H row 2 add formula: =COUNTIF($A$2:A2,A2)>1','Freeze row 1 (headers)','Share sheet link — save it somewhere accessible']},
+     {label:'📊 Create Tracking Sheet', tasks:['Create Sheet 2: "Daily Log"','Columns: Date | Day | Industry | City | Mailbox | Sent | Responses | Bounces | Notes','Create Sheet 3: "City Tracker" — mark which City+Industry combos are scraped']}
+   ]},
+  {day:'W1 · Day 4', title:'Start Scraping — Tech Industry', goal:'Run first Apify scrape: Tech companies in New York',
+   groups:[
+     {label:'🔍 Apify Run #1', tasks:['Login to apify.com','Open Google Maps Scraper','Click JSON tab — paste Tech config (see Scraping tab)','Set locationQuery to "New York, USA"','Click Save & Start — takes 2–4 hours','Let it run, check back in evening']},
+     {label:'📋 After Run Completes', tasks:['Export results as CSV','Open CSV — check columns (name, website, phone, address)','Paste emails into Master Leads Sheet column A','Run IsDuplicate formula — delete TRUE rows','Save clean file as: Tech_NewYork_leads.csv']}
+   ]},
+  {day:'W1 · Day 5', title:'Scrape Tech — San Francisco + Upload NYC', goal:'2nd Apify run + upload first batch to Smartlead',
+   groups:[
+     {label:'🔍 Apify Run #2', tasks:['Change locationQuery to "San Francisco, USA"','Run same Tech config','Let it run in background']},
+     {label:'📤 Upload NYC Tech Leads to Smartlead', tasks:['In Smartlead → Campaigns → New Campaign → "Tech Phase 1"','Upload Tech_NewYork_leads.csv','Map columns: email, firstName, lastName, companyName, city','Set sending mailbox: ravi@godashstack.com','Do NOT activate yet — wait for warmup to complete']}
+   ]},
+  {day:'W1 · Days 6–7', title:'Continue Scraping + Warmup Monitor', goal:'Scrape LA + Chicago Tech · Monitor warmup health',
+   groups:[
+     {label:'🔍 Apify Runs', tasks:['Day 6: Run Tech scrape for Los Angeles','Day 7: Run Tech scrape for Chicago','Clean and save each CSV separately','Add all leads to Master Sheet (deduplicate before saving)']},
+     {label:'🔥 Warmup Check', tasks:['Go to Smartlead → Email Accounts → each mailbox → Warmup tab','Check warmup score — should be increasing','Check spam rate — must stay below 5%','If any mailbox shows spam issues → reduce warmup volume']}
+   ]},
+  {day:'W2 · Days 8–10', title:'Scrape Austin + Boston + Seattle Tech', goal:'Complete Tech industry scraping for all 10 cities',
+   groups:[
+     {label:'🔍 Apify Runs', tasks:['Day 8: Tech scrape — Austin, Texas','Day 9: Tech scrape — Boston, Massachusetts','Day 10: Tech scrape — Seattle, Washington','Clean each CSV and add to Master Sheet']},
+     {label:'⚙️ Smartlead Campaign Prep', tasks:['Create email template for Tech (see Templates tab)','Add Day 7 follow-up template to campaign','Add Day 12 final follow-up template','Configure follow-up delays in Smartlead sequence','Review all {{variables}} are mapped correctly']}
+   ]},
+  {day:'W2 · Days 11–12', title:'Scrape Dallas + Houston Tech + Start Health Scraping', goal:'Finish Tech scraping · Begin Healthcare scraping',
+   groups:[
+     {label:'🔍 Apify Runs', tasks:['Day 11: Tech scrape — Dallas, Texas','Day 12: Tech scrape — Houston, Texas','Day 12: Start Healthcare scrape — New York (run overnight)']},
+     {label:'📤 Upload All Tech Leads', tasks:['Combine all 10 city CSVs into one file','Run final deduplication on Master Sheet','Upload combined Tech leads to Smartlead Tech campaign','Verify lead count in Smartlead matches your clean CSV']}
+   ]},
+  {day:'W2 · Days 13–14', title:'Final Warmup Test + Campaign Ready', goal:'Verify inbox delivery · Activate Day 1 send',
+   groups:[
+     {label:'✅ Inbox Delivery Test', tasks:['Go to mail-tester.com','Send test email from ravi@godashstack.com to their address','Score must be 9+/10 — if lower, fix issues before sending','Test all 5 mailboxes — all must pass','Check Smartlead warmup score — must be 70+']},
+     {label:'🚀 Pre-Launch Final Check', tasks:['Calendly link added to all email signatures','Tech leads uploaded and campaign configured in Smartlead','All {{variables}} tested with real data (no blank fields)','Global Unsubscribe list enabled in Smartlead','Dedup Master Sheet ready and bookmarked','Day 1 is tomorrow — everything is ready!']}
+   ]}
+];
+
+// ── PHASE DAY GENERATOR ─────────────────────────────────────────────────────
+function genPhase(ind) {
+  const days=[], total=ind.phase[1]-ind.phase[0]+1;
+  for(let i=0;i<total;i++){
+    const d=ind.phase[0]+i;
+    const city=ind.cities[i%ind.cities.length];
+    const dow=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'][i%7];
+    const isReview=(i+1)%5===0;
+    const isFollowupDay7=i===6, isFollowupDay12=i===11;
+    days.push({d,city,dow,isReview,isFollowupDay7,isFollowupDay12,
+      groups:[
+        {label:'🌅 Morning (11:00 AM IST)', tasks:[
+          `Open Smartlead → ${ind.label} campaign`,
+          `Verify today's 20 leads are queued (${city} ${ind.label})`,
+          `Send 20 emails from ${ind.mailbox}`,
+          `Check: delivery rate above 95%?`
+        ]},
+        {label:'🕑 Afternoon (2:00 PM IST)', tasks:[
+          `Check for any immediate replies`,
+          `Respond to WhatsApp messages within 2 hours`,
+          isFollowupDay7?`⭐ Day 7 follow-ups auto-sent by Smartlead — verify in campaign`
+            :isFollowupDay12?`⭐ Day 12 final follow-ups auto-sent — check Smartlead sequence`
+            :`Monitor bounce rate — must stay below 2%`
+        ]},
+        {label:'🌆 Evening (5:00 PM IST)', tasks:[
+          `Log Day ${d} in Google Sheet: sent=20, city=${city}`,
+          `Export any new responses to Responses sheet`,
+          `Update dedup: add today's sent emails to Master Sheet`,
+          isReview?`⭐ Weekly review: open rate, response rate, bounce rate — adjust if needed`
+            :`Prep tomorrow: verify next city leads are ready in Smartlead queue`,
+          `Scrape ${ind.cities[(i+1)%ind.cities.length]} ${ind.label} on Apify if not done`
+        ]}
+      ]
+    });
   }
   return days;
 }
 
-const phase1Days=genPhase(1,25,'Tech',['NYC','San Francisco','Los Angeles','Chicago','Austin','Boston','Seattle','Dallas','Houston','Phoenix'],['Focus: SaaS & software agencies','Focus: Digital product companies','Focus: Tech consultancies','Focus: Dev shops & mobile agencies','Weekly review: adjust subject lines if open rate < 18%']);
-const phase2Days=genPhase(26,50,'Health/FinTech/Ecom',['NYC HealthTech','Chicago FinTech','LA E-commerce','SF HealthTech','Boston FinTech','NYC E-commerce','Seattle HealthTech','Austin FinTech'],['HIPAA-ready angle for healthcare','Real-time payments/trading angle','Cart + push notifications angle','Patient data security angle','Follow-ups from Phase 1 now activating!']);
-const phase3Days=genPhase(51,75,'Funded Startups',['NYC Series A','SF Series B','LA Series C','Chicago Series A','Boston Series B','Austin Series A','Seattle Series B','NYC Series C'],['Congratulate on funding round','Scale from 0→100K users pitch','Technical debt / MVP angle','Growth stage mobile strategy','Check: Phase 1 follow-ups closing now']);
-const phase4Days=genPhase(76,100,'Service Biz',['NYC Restaurants','LA Clinics','Chicago Salons','Houston Hotels','Phoenix Real Estate','Dallas Restaurants','SF Clinics','Austin Hotels'],['Booking app = 30% more bookings','Customer history & reminders angle','Loyalty programme mobile angle','Contactless ordering/check-in angle','Final week: all follow-ups activated']);
-
-const emailTemplates=[
-  {phase:'Phase 1 (Days 1–25)',segment:'Tech Companies',subject:'Full-stack mobile expansion for {{companyName}}',body:`Hi {{firstName}},\n\nFound {{companyName}} on Google Maps — your work in {{specificService}} is really impressive.\n\nQuick thought: leading {{industry}} companies are now offering {{specificSolution}} through dedicated mobile apps. We specialize in full-stack Flutter development (iOS + Android + backend).\n\nHave worked with similar companies like {{competitor}}.\n\nQuestion: Is mobile expansion on {{companyName}}'s roadmap this year?\n\nWould be worth a quick 15-min chat to explore.\n\nBest,\nRavi Vithani\n📱 WhatsApp: 8153916802\n🌐 www.dashstack.tech`},
-  {phase:'Phase 2 (Days 26–50)',segment:'HealthTech',subject:"{{companyName}}'s next growth channel — secure mobile app",body:`Hi {{firstName}},\n\nYour work scaling {{companyName}}'s {{specific_service}} caught my attention.\n\nHealthcare apps need built-in security + compliance. We've built HIPAA-ready apps for {{similar_company}}, handling patient data securely at scale.\n\nFull stack means we own: API security, app quality, deployment.\n\nQuestion: What's blocking {{companyName}}'s mobile roadmap right now?\n\nOpen to a quick 15-min conversation.\n\nBest,\nRavi Vithani\n📱 WhatsApp: 8153916802`},
-  {phase:'Phase 2 (Days 26–50)',segment:'FinTech',subject:"Scaling {{companyName}}'s mobile platform — securely",body:`Hi {{firstName}},\n\nFinTech apps are bottlenecks for growth. {{companyName}}'s customers expect instant transactions, not complex web dashboards.\n\nWe've built real-time trading, investment, and payment apps. Security & performance built-in from day one.\n\nFull stack means: API design through production deployment.\n\nCurious: What's your mobile roadmap for 2026?\n\nWorth 15 minutes?\n\nBest,\nRavi Vithani\n📱 WhatsApp: 8153916802`},
-  {phase:'Phase 2 (Days 31–50)',segment:'E-commerce',subject:'{{companyName}} — mobile app could increase AOV by 40%',body:`Hi {{firstName}},\n\nE-commerce apps drive higher conversion than mobile web. Companies like {{similar_ecom}} increased repeat purchases 40% with a dedicated app.\n\nWe build commerce apps with: payment integration, push notifications, inventory sync, customer data.\n\n{{companyName}}'s {{specific_product}} would translate beautifully to mobile.\n\nQuestion: Has mobile app been on {{companyName}}'s radar?\n\nLet's discuss — 15 minutes?\n\nBest,\nRavi Vithani\n📱 WhatsApp: 8153916802`},
-  {phase:'Phase 3 (Days 51–75)',segment:'Funded Startups',subject:'Congratulations on Series {{fundingRound}} — mobile next?',body:`Hi {{firstName}},\n\nSaw {{companyName}} raised Series {{fundingRound}}. That's perfect timing for mobile expansion.\n\nWe've helped post-Series B companies scale from 0 to 100K+ users with production-quality Flutter apps.\n\nFull stack team means: rapid MVP, then scaling without technical debt.\n\nYour next growth lever could be mobile. Worth exploring together?\n\nLet's chat — 20 minutes this week?\n\nBest,\nRavi Vithani\n📱 WhatsApp: 8153916802`},
-  {phase:'Phase 4 (Days 76–100)',segment:'Service Businesses',subject:"{{companyName}} — your customers expect a booking app",body:`Hi {{firstName}},\n\n{{businessType}} owners we work with increased bookings 30% with a dedicated mobile app. Customers book on app 2x more than calling.\n\n{{companyName}} specifically could benefit from: instant booking, customer history, automated reminders.\n\nWe build exactly this — no bloated software, just mobile + backend.\n\nWorth a 15-min chat to see if this fits?\n\nBest,\nRavi Vithani\n📱 WhatsApp: 8153916802`},
-];
-
-// ── STORAGE ───────────────────────────────────────────────────────────────────
-function saveChecks(){
-  const state={};
-  document.querySelectorAll('.check').forEach(el=>{
-    if(el.dataset.key)state[el.dataset.key]=el.classList.contains('done');
-  });
-  localStorage.setItem(LS_CHECKS,JSON.stringify(state));
+// ── RENDER WARMUP ───────────────────────────────────────────────────────────
+function renderWarmup(){
+  const el=document.getElementById('warmup-timeline');
+  el.innerHTML=WARMUP.map((d,i)=>`
+    <div class="day-item">
+      <div class="day-dot" style="background:var(--amber)">${i+1}</div>
+      <div class="day-card">
+        <div class="day-header"><span class="day-num">${d.day}</span><span class="tag tag-setup">setup</span></div>
+        <div class="day-title">${d.title}</div>
+        <div class="day-goal">🎯 ${d.goal}</div>
+        <ul class="tasks">${d.groups.map(g=>`
+          <li style="flex-direction:column;align-items:flex-start;padding:0;border-bottom:none">
+            <div class="task-group-label">${g.label}</div>
+            ${g.tasks.map((t,ti)=>{const k=`wu_${i}_${ti}`;return`
+              <div style="display:flex;align-items:flex-start;gap:7px;padding:3px 0;width:100%;border-bottom:1px solid var(--border);font-size:12px">
+                <div class="check" data-key="${k}" onclick="toggleCheck(this)"></div>
+                <span>${t}</span>
+              </div>`}).join('')}
+          </li>`).join('')}
+        </ul>
+      </div>
+    </div>`).join('');
 }
 
+// ── RENDER PHASE ────────────────────────────────────────────────────────────
+function renderPhase(containerId, ind){
+  const days=genPhase(ind);
+  document.getElementById(containerId).innerHTML=days.map((day,i)=>`
+    <div class="day-item">
+      <div class="day-dot" style="background:${ind.color}">${i+1}</div>
+      <div class="day-card">
+        <div class="day-header">
+          <span class="day-num">Day ${day.d} · ${day.dow}</span>
+          <span class="tag tag-email">email</span>
+        </div>
+        <div class="day-title">${ind.emoji} ${ind.label} — ${day.city}</div>
+        <div class="day-goal">🎯 ${ind.pitch} · ${ind.angle}</div>
+        <ul class="tasks">${day.groups.map(g=>`
+          <li style="flex-direction:column;align-items:flex-start;padding:0;border-bottom:none">
+            <div class="task-group-label">${g.label}</div>
+            ${g.tasks.map((t,ti)=>{const k=`${containerId}_${i}_${ti}`;return`
+              <div style="display:flex;align-items:flex-start;gap:7px;padding:3px 0;width:100%;border-bottom:1px solid var(--border);font-size:12px">
+                <div class="check" data-key="${k}" onclick="toggleCheck(this)"></div>
+                <span>${t}</span>
+              </div>`}).join('')}
+          </li>`).join('')}
+        </ul>
+      </div>
+    </div>`).join('');
+}
+
+// ── SCRAPING CARDS ──────────────────────────────────────────────────────────
+function buildScrapingCards(){
+  const saved=JSON.parse(localStorage.getItem(LS_CITIES)||'{}');
+  document.getElementById('scrape-cards').innerHTML=IND.map(ind=>{
+    const json=JSON.stringify({
+      searchStringsArray:ind.terms.slice(0,8),
+      locationQuery:ind.cities[0]+", USA",
+      maxCrawledPlacesPerSearch:50,
+      language:"en",
+      website:"withWebsite",
+      skipClosedPlaces:true,
+      scrapeContacts:false,
+      maxReviews:0,
+      maxImages:0,
+      scrapePlaceDetailPage:false
+    },null,2);
+    return`<div class="scrape-card">
+      <div class="scrape-header">
+        <div class="scrape-title">${ind.emoji} ${ind.label}</div>
+        <span class="scrape-badge" style="background:${ind.colorL};color:${ind.color}">Days ${ind.phase[0]}–${ind.phase[1]}</span>
+      </div>
+      <div class="scrape-meta">Mailbox: ${ind.mailbox} · ~$2/city · 500 leads/run · Change locationQuery each day</div>
+      <div style="font-size:10px;font-weight:600;color:var(--text2);margin-bottom:4px">Cities (tap to mark done):</div>
+      <div class="city-grid">${ind.cities.map(c=>{
+        const k=`${ind.id}_${c}`;
+        const done=saved[k];
+        return`<span class="city-chip${done?' done-city':''}" onclick="toggleCity('${k}',this)">${c}</span>`;
+      }).join('')}</div>
+      <div style="font-size:10px;font-weight:600;color:var(--text2);margin-bottom:4px">Search terms:</div>
+      <div class="scrape-terms">${ind.terms.map(t=>`<span class="scrape-term">${t}</span>`).join('')}</div>
+      <div style="font-size:10px;font-weight:600;color:var(--text2);margin-bottom:4px">Apify JSON config:</div>
+      <div class="json-block" id="json-${ind.id}">${json.replace(/&/g,'&amp;').replace(/</g,'&lt;')}</div>
+      <button class="copy-btn" onclick="copyJSON('${ind.id}')">📋 Copy JSON</button>
+    </div>`;
+  }).join('');
+}
+
+function toggleCity(key, el){
+  const saved=JSON.parse(localStorage.getItem(LS_CITIES)||'{}');
+  saved[key]=!saved[key];
+  localStorage.setItem(LS_CITIES, JSON.stringify(saved));
+  el.classList.toggle('done-city', saved[key]);
+}
+
+function copyJSON(id){
+  const txt=document.getElementById('json-'+id).textContent;
+  navigator.clipboard.writeText(txt).then(()=>{
+    const btn=document.getElementById('json-'+id).nextElementSibling;
+    btn.textContent='✅ Copied!';
+    setTimeout(()=>btn.textContent='📋 Copy JSON',2000);
+  });
+}
+
+// ── TEMPLATES ───────────────────────────────────────────────────────────────
+const TEMPLATES=[
+  {ind:'Tech', mb:'ravi@godashstack.com', type:'Initial Email',
+   subj:'Flutter mobile app for {{companyName}}?',
+   body:`Hi {{firstName}},
+
+Found {{companyName}} while researching top tech companies in {{city}} — impressive work.
+
+Quick thought: most {{industry}} companies still don't have a dedicated mobile app, and that's leaving serious growth on the table.
+
+We build full-stack Flutter apps (iOS + Android + Backend) for tech companies. Fast, production-quality, no technical debt.
+
+Is mobile on {{companyName}}'s roadmap this year?
+
+Worth a 15-min chat → [Your Calendly Link]
+
+Best,
+Ravi Vithani
+DashStack Infotech
+📱 WhatsApp: +91 8153916802 | 🌐 www.dashstack.tech`},
+  {ind:'Tech', mb:'ravi@godashstack.com', type:'Day 7 Follow-up',
+   subj:'Re: Flutter mobile app for {{companyName}}',
+   body:`Hi {{firstName}},
+
+Just following up on my note from last week about mobile expansion for {{companyName}}.
+
+We just shipped a Flutter app for a similar company in {{city}} — went from zero to App Store in 8 weeks.
+
+Happy to share the case study if useful.
+
+Still worth 15 minutes? → [Your Calendly Link]
+
+Ravi`},
+  {ind:'Tech', mb:'ravi@godashstack.com', type:'Day 12 Final',
+   subj:'Last note — {{companyName}} mobile app',
+   body:`Hi {{firstName}},
+
+Last message from me — if mobile isn't a priority right now, totally understand.
+
+Just know we're here when {{companyName}} is ready to build. Most of our clients wish they started 6 months earlier.
+
+If timing changes: → [Your Calendly Link]
+
+All the best,
+Ravi`},
+  {ind:'Healthcare', mb:'ravi.vithani@godashstack.com', type:'Initial Email',
+   subj:'HIPAA-ready mobile app for {{companyName}}',
+   body:`Hi {{firstName}},
+
+Came across {{companyName}} — great work in the {{city}} healthcare space.
+
+Patient-facing mobile apps are now table stakes for healthcare businesses. The challenge is getting them right — secure, HIPAA-compliant, and actually easy for patients to use.
+
+We build HIPAA-ready Flutter apps for clinics and health companies. Full stack — API, mobile app, backend.
+
+What does {{companyName}}'s patient communication look like today?
+
+15 min to explore → [Your Calendly Link]
+
+Best,
+Ravi Vithani
+DashStack Infotech
+📱 WhatsApp: +91 8153916802 | 🌐 www.dashstack.tech`},
+  {ind:'Healthcare', mb:'ravi.vithani@godashstack.com', type:'Day 7 Follow-up',
+   subj:'Re: Patient mobile app for {{companyName}}',
+   body:`Hi {{firstName}},
+
+Following up quickly — wanted to share that we just helped a clinic in {{city}} reduce no-shows by 35% with a simple patient booking app.
+
+Thought it might be relevant for {{companyName}}.
+
+Happy to send the case study. Or if you'd prefer a quick call → [Your Calendly Link]
+
+Ravi`},
+  {ind:'Healthcare', mb:'ravi.vithani@godashstack.com', type:'Day 12 Final',
+   subj:'Final note — {{companyName}} patient app',
+   body:`Hi {{firstName}},
+
+Last reach out from me on this.
+
+If a patient mobile app ever comes up at {{companyName}}, we'd love to help. We specialize in healthcare — HIPAA, patient data, and all.
+
+Reach out anytime → [Your Calendly Link]
+
+Best,
+Ravi`},
+  {ind:'Ecommerce', mb:'r.vithani@godashstack.com', type:'Initial Email',
+   subj:'{{companyName}} — mobile app buyers spend 3x more',
+   body:`Hi {{firstName}},
+
+Noticed {{companyName}}'s store — great products.
+
+Here's a stat worth knowing: mobile app shoppers spend 3x more per order than mobile web shoppers. Push notifications alone bring back customers who would otherwise never return.
+
+We build Flutter commerce apps with cart, checkout, push notifications, loyalty features, and backend — for brands like {{companyName}}.
+
+Has a dedicated shopping app been on your radar?
+
+15 min to chat → [Your Calendly Link]
+
+Best,
+Ravi Vithani
+DashStack Infotech
+📱 WhatsApp: +91 8153916802 | 🌐 www.dashstack.tech`},
+  {ind:'Ecommerce', mb:'r.vithani@godashstack.com', type:'Day 7 Follow-up',
+   subj:'Re: {{companyName}} mobile shopping app',
+   body:`Hi {{firstName}},
+
+Quick follow-up — we just launched a shopping app for a brand similar to {{companyName}} in {{city}}. Repeat purchase rate went up 40% in the first 60 days.
+
+Worth a look? I can send the case study or we can jump on a 15-min call → [Your Calendly Link]
+
+Ravi`},
+  {ind:'Ecommerce', mb:'r.vithani@godashstack.com', type:'Day 12 Final',
+   subj:'Last note — {{companyName}} mobile app',
+   body:`Hi {{firstName}},
+
+Last one from me.
+
+If {{companyName}} ever decides to build a dedicated shopping app, we'd love to be your team. We build for brands of all sizes.
+
+Door's always open → [Your Calendly Link]
+
+Best,
+Ravi`},
+  {ind:'Startups', mb:'ravi.v@godashstack.com', type:'Initial Email',
+   subj:'Flutter MVP for {{companyName}} — fast',
+   body:`Hi {{firstName}},
+
+Found {{companyName}} — love what you're building.
+
+If you need a mobile MVP, we can help. We build production-quality Flutter apps (iOS + Android + Backend) fast — without the technical debt that slows most early-stage teams down.
+
+Most of our startup clients go from spec to App Store in 6–10 weeks.
+
+Is {{companyName}} looking to build or scale a mobile product?
+
+15 min → [Your Calendly Link]
+
+Best,
+Ravi Vithani
+DashStack Infotech
+📱 WhatsApp: +91 8153916802 | 🌐 www.dashstack.tech`},
+  {ind:'Startups', mb:'ravi.v@godashstack.com', type:'Day 7 Follow-up',
+   subj:'Re: Flutter MVP for {{companyName}}',
+   body:`Hi {{firstName}},
+
+Following up — we recently helped a {{city}}-based startup ship their MVP in 7 weeks and close their seed round right after.
+
+If {{companyName}} is at that stage, happy to share how we worked.
+
+Quick call? → [Your Calendly Link]
+
+Ravi`},
+  {ind:'Startups', mb:'ravi.v@godashstack.com', type:'Day 12 Final',
+   subj:'Last note — {{companyName}} mobile product',
+   body:`Hi {{firstName}},
+
+Last message from me.
+
+If mobile becomes a priority for {{companyName}}, we're here. We love working with startups — small teams, big ambitions.
+
+Reach out anytime → [Your Calendly Link]
+
+Best,
+Ravi`},
+  {ind:'Service Biz', mb:'rv@godashstack.com', type:'Initial Email',
+   subj:'{{companyName}} — customers book 2x more on mobile',
+   body:`Hi {{firstName}},
+
+Came across {{companyName}} in {{city}} — great reviews.
+
+Quick insight: service businesses with a dedicated booking app get 2x more appointments than those relying on phone or website alone. Push notifications for reminders alone reduce no-shows by 30%.
+
+We build Flutter booking apps for businesses like {{companyName}} — instant booking, customer history, automated reminders.
+
+Worth a 15-min chat to see if it fits? → [Your Calendly Link]
+
+Best,
+Ravi Vithani
+DashStack Infotech
+📱 WhatsApp: +91 8153916802 | 🌐 www.dashstack.tech`},
+  {ind:'Service Biz', mb:'rv@godashstack.com', type:'Day 7 Follow-up',
+   subj:'Re: Booking app for {{companyName}}',
+   body:`Hi {{firstName}},
+
+Just following up — we built a booking app for a similar business in {{city}} last quarter. They saw 40% more appointments in the first month.
+
+Thought it might be worth a quick conversation for {{companyName}}.
+
+15 min → [Your Calendly Link]
+
+Ravi`},
+  {ind:'Service Biz', mb:'rv@godashstack.com', type:'Day 12 Final',
+   subj:'Last note — {{companyName}} booking app',
+   body:`Hi {{firstName}},
+
+Last reach-out from me.
+
+If a mobile booking app ever makes sense for {{companyName}}, we'd love to help. Happy to revisit whenever the timing is right.
+
+→ [Your Calendly Link]
+
+Best,
+Ravi`},
+];
+
+function buildTemplates(){
+  const colors={Tech:'var(--blue)',Healthcare:'var(--teal)',Ecommerce:'var(--coral)',Startups:'var(--purple)','Service Biz':'var(--amber)'};
+  document.getElementById('templates-list').innerHTML=TEMPLATES.map(t=>`
+    <div class="template-card">
+      <div class="template-label" style="color:${colors[t.ind]||'var(--gray)'}">${t.ind} · ${t.type} · ${t.mb}</div>
+      <div class="template-subject">Subject: ${t.subj}</div>
+      <div class="template-body">${t.body}</div>
+    </div>`).join('');
+}
+
+// ── STORAGE ──────────────────────────────────────────────────────────────────
+function toggleCheck(el){
+  el.classList.toggle('done');
+  el.closest('div[style]')?.classList.toggle('completed', el.classList.contains('done'));
+  const s={};
+  document.querySelectorAll('.check[data-key]').forEach(c=>s[c.dataset.key]=c.classList.contains('done'));
+  localStorage.setItem(LS_C, JSON.stringify(s));
+}
 function loadChecks(){
   try{
-    const state=JSON.parse(localStorage.getItem(LS_CHECKS)||'{}');
-    document.querySelectorAll('.check').forEach(el=>{
-      if(el.dataset.key&&state[el.dataset.key]){
-        el.classList.add('done');
-        el.closest('li')?.classList.add('completed');
-      }
+    const s=JSON.parse(localStorage.getItem(LS_C)||'{}');
+    document.querySelectorAll('.check[data-key]').forEach(el=>{
+      if(s[el.dataset.key]) el.classList.add('done');
     });
   }catch(e){}
 }
-
 function saveMetrics(){
-  const m={day:document.getElementById('inp-day').value,sent:document.getElementById('inp-sent').value,resp:document.getElementById('inp-resp').value,deals:document.getElementById('inp-deals').value};
-  localStorage.setItem(LS_METRICS,JSON.stringify(m));
+  const v={d:document.getElementById('inp-day').value,s:document.getElementById('inp-sent').value,r:document.getElementById('inp-resp').value,dl:document.getElementById('inp-deals').value};
+  localStorage.setItem(LS_M, JSON.stringify(v));
+  renderMetrics(v);
+  const b=document.getElementById('saved-badge');
+  b.style.display='block';
+  setTimeout(()=>b.style.display='none',2500);
 }
-
 function loadMetrics(){
   try{
-    const m=JSON.parse(localStorage.getItem(LS_METRICS)||'{}');
-    if(m.day){
-      document.getElementById('inp-day').value=m.day;
-      document.getElementById('inp-sent').value=m.sent;
-      document.getElementById('inp-resp').value=m.resp;
-      document.getElementById('inp-deals').value=m.deals;
-      updateMetrics(true);
+    const v=JSON.parse(localStorage.getItem(LS_M)||'{}');
+    if(v.d){
+      document.getElementById('inp-day').value=v.d;
+      document.getElementById('inp-sent').value=v.s;
+      document.getElementById('inp-resp').value=v.r;
+      document.getElementById('inp-deals').value=v.dl;
+      renderMetrics(v);
     }
   }catch(e){}
 }
-
+function renderMetrics(v){
+  document.getElementById('m-day').textContent=v.d||0;
+  document.getElementById('m-sent').textContent=parseInt(v.s||0).toLocaleString();
+  document.getElementById('m-resp').textContent=v.r||0;
+  document.getElementById('m-deals').textContent=v.dl||0;
+  document.getElementById('pb-day').style.width=Math.min(v.d||0,100)+'%';
+  document.getElementById('pb-sent').style.width=Math.min((v.s||0)/20,100)+'%';
+  if((v.s||0)>0){
+    document.getElementById('rate-display').style.display='block';
+    document.getElementById('rate-val').textContent=((v.r/v.s)*100).toFixed(1);
+    document.getElementById('close-val').textContent=v.r>0?((v.dl/v.r)*100).toFixed(1):'0.0';
+  }
+}
 function resetAll(){
-  if(!confirm('Reset all checkboxes and metrics? This cannot be undone.'))return;
-  localStorage.removeItem(LS_CHECKS);
-  localStorage.removeItem(LS_METRICS);
-  document.querySelectorAll('.check').forEach(el=>{el.classList.remove('done');el.closest('li')?.classList.remove('completed')});
+  if(!confirm('Reset all checkboxes and metrics?'))return;
+  localStorage.removeItem(LS_C);localStorage.removeItem(LS_M);
+  document.querySelectorAll('.check').forEach(el=>el.classList.remove('done'));
   ['inp-day','inp-sent','inp-resp','inp-deals'].forEach(id=>document.getElementById(id).value='');
   ['m-day','m-sent','m-resp','m-deals'].forEach(id=>document.getElementById(id).textContent='0');
   document.getElementById('pb-day').style.width='0%';
   document.getElementById('pb-sent').style.width='0%';
   document.getElementById('rate-display').style.display='none';
 }
-
-// ── RENDER ────────────────────────────────────────────────────────────────────
-const colors={setup:['var(--amber)'],phase1:['var(--blue)'],phase2:['var(--teal)'],phase3:['var(--purple)'],phase4:['var(--coral)']};
-
-function renderTimeline(containerId,days,colorKey){
-  const [dotColor]=colors[colorKey]||colors.setup;
-  const container=document.getElementById(containerId);
-  if(!container)return;
-  container.innerHTML=days.map((d,i)=>`
-    <div class="day-item">
-      <div class="day-dot" style="background:${dotColor};color:#fff;font-size:8px">${i+1}</div>
-      <div class="day-card">
-        <div class="day-header">
-          <span class="day-num">${d.day}</span>
-          <span class="tag tag-${d.tags[0]}">${d.tags[0]}</span>
-        </div>
-        <div class="day-title">${d.title}</div>
-        <div class="day-goal">🎯 ${d.goal}</div>
-        <ul class="tasks">
-          ${d.tasks.map((t,ti)=>{
-            const key=`${containerId}_${i}_${ti}`;
-            return`<li><div class="check" data-key="${key}" onclick="toggleCheck(this)"></div><span>${t}</span></li>`;
-          }).join('')}
-        </ul>
-      </div>
-    </div>`).join('');
-}
-
-function renderTemplates(){
-  document.getElementById('templates-list').innerHTML=emailTemplates.map(t=>`
-    <div class="template-card">
-      <div class="template-label">${t.phase} · ${t.segment}</div>
-      <div class="template-subject">Subject: "${t.subject}"</div>
-      <div class="template-body">${t.body}</div>
-    </div>`).join('');
-}
-
-function toggleCheck(el){
-  el.classList.toggle('done');
-  el.closest('li').classList.toggle('completed',el.classList.contains('done'));
-  saveChecks();
-}
-
 function show(id,btn){
   document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
   document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
@@ -358,37 +889,11 @@ function show(id,btn){
   if(btn)btn.classList.add('active');
 }
 
-function updateMetrics(silent){
-  const day=parseInt(document.getElementById('inp-day').value)||0;
-  const sent=parseInt(document.getElementById('inp-sent').value)||0;
-  const resp=parseInt(document.getElementById('inp-resp').value)||0;
-  const deals=parseInt(document.getElementById('inp-deals').value)||0;
-  document.getElementById('m-day').textContent=day;
-  document.getElementById('m-sent').textContent=sent.toLocaleString();
-  document.getElementById('m-resp').textContent=resp;
-  document.getElementById('m-deals').textContent=deals;
-  document.getElementById('pb-day').style.width=Math.min(day,100)+'%';
-  document.getElementById('pb-sent').style.width=Math.min(sent/100,100)+'%';
-  if(sent>0){
-    document.getElementById('rate-display').style.display='block';
-    document.getElementById('rate-val').textContent=((resp/sent)*100).toFixed(1);
-    document.getElementById('close-val').textContent=resp>0?((deals/resp)*100).toFixed(1):'0.0';
-  }
-  if(!silent){
-    saveMetrics();
-    const badge=document.getElementById('saved-badge');
-    badge.style.display='block';
-    setTimeout(()=>badge.style.display='none',2000);
-  }
-}
-
-// ── INIT ──────────────────────────────────────────────────────────────────────
-renderTimeline('setup-timeline',setupDays,'setup');
-renderTimeline('phase1-timeline',phase1Days,'phase1');
-renderTimeline('phase2-timeline',phase2Days,'phase2');
-renderTimeline('phase3-timeline',phase3Days,'phase3');
-renderTimeline('phase4-timeline',phase4Days,'phase4');
-renderTemplates();
+// ── INIT ─────────────────────────────────────────────────────────────────────
+renderWarmup();
+IND.forEach((ind,i)=>renderPhase(['p1-tl','p2-tl','p3-tl','p4-tl','p5-tl'][i], ind));
+buildScrapingCards();
+buildTemplates();
 loadChecks();
 loadMetrics();
 </script>
